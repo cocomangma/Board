@@ -1,0 +1,29 @@
+drop table t_board  
+
+create table t_board(
+board_idx int(11) auto_increment not null,
+title varchar(100) not null,
+contents longtext not null,
+hit_cnt smallint(10) default 0 not null,
+created_datetime datetime not null,
+creator_id varchar(100) not null,
+image longblob not null,
+constraint t_board_pk primary key (board_idx)
+)
+
+insert into t_board values(1,'안녕하세요','반가워요','0','2022-10-20 10:00:40','홍길동',null)
+
+drop table t_member
+create table t_member(
+	memberidx int(11)auto_increment not null,
+	memberemail varchar(100) not null,
+	memberpassword varchar(100) not null,
+	membername varchar(100) not null,
+	memberphone varchar(100) not null,
+	constraint t_member_pk primary key (memberidx)
+)
+
+insert into t_member values(1,'a','b','c')
+
+
+

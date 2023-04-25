@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board.member.mapper.MemberMapper">
+
+<!-- 회원가입 관련 xml -->
+    
+    <select id="selectMemberList" resultType="board.member.dto.MemberDto">
+    <![CDATA[
+    
+    	select 
+    		memberidx,memberemail,memberpassword,membername,memberphone
+    	from
+    		t_member
+    	order by
+    		memberidx desc
+    
+    ]]>
+    
+    </select>
+    
+    <select id="login" resultType="board.member.dto.MemberDto">
+    	<![CDATA[
+    
+    	select 
+	    	* 
+    	from
+    		t_member
+    	where
+    		memberemail = #{memberemail} and memberpassword = #{memberpassword}
+    		]]>
+    		
+    </select>
+    
+     <select id="loginAdmin" resultType="board.member.dto.MemberDto">
+    	<![CDATA[
+    
+    	select 
+	    	* 
+    	from
+    		t_member
+    	where
+    		memberemail = #{memberemail} and memberpassword = #{memberpassword}
+    		]]>
+    		
+    </select>
+    
+    <insert id="insertMember" parameterType="board.member.dto.MemberDto">
+    	<![CDATA[
+    	insert into t_member
+    		(memberemail,memberpassword,membername,memberphone)
+    	values
+    		(#{memberemail},#{memberpassword},#{membername},#{memberphone})
+    	
+    	]]>
+    </insert>
+    
+    <select id="checkId" parameterType="board.member.dto.MemberDto" resultType="int">
+    <![CDATA[
+    	select
+    		count(*)
+    	from 
+    		t_member
+    	where
+    		memberemail=#{memberemail}
+    		]]>
+    </select>
+    
+    
+    <delete id="deleteMember" parameterType="int">
+    <![CDATA[
+    	delete from t_member where memberidx=#{memberidx} 
+        ]]>
+    </delete>
+    
+    <select id="selectMemberOne" resultType="board.member.dto.MemberDto">
+    	<![CDATA[
+    	select 
+    		memberidx,memberemail,memberpassword,membername,memberphone
+    	from
+    		t_member
+    	where
+    		memberidx = #{memberidx}
+    	]]>	
+    
+    </select>
+    
+    <update id="updateMember" parameterType="board.member.dto.MemberDto">
+    	<![CDATA[
+    	update
+    		t_member
+    	set
+    		memberemail = #{memberemail},
+    		memberpassword = #{memberpassword},
+    		membername = #{membername},
+    		memberphone = #{memberphone}
+    	where
+    		memberidx = #{memberidx} 
+    		]]>
+    </update>
+    
+    
+</mapper>
