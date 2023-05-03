@@ -16,11 +16,10 @@ public interface BoardMapper {
 	public void updateBoard(BoardDto board) throws Exception;
 	public void deleteBoard(int boardIdx) throws Exception;
 	public BoardDto selectBoardList2(int boardIdx) throws Exception;
-	public List<BoardDto> selectAdminBoardList(Map<String, Integer> pagingParams)throws Exception;;
 	public int boardCount()throws Exception;;
-	
+
 }
 
 
 
- 
+

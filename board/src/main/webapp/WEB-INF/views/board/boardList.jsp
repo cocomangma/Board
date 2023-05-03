@@ -70,6 +70,10 @@
 				<col width="15%" />
 				<col width="5%" />
 				<col width="15%" />
+				<c:if test="${ sessionScope.memberDto.memberemail eq 'admin'}">
+				<col width="5%" />
+				<col width="5%" />
+				</c:if>
 			</colgroup>
 
 			<thead>
@@ -79,6 +83,10 @@
 					<th scope="col">작성자</th>
 					<th scope="col">조회수</th>
 					<th scope="col">작성일</th>
+					<c:if test="${ sessionScope.memberDto.memberemail eq 'admin'}">
+					<th scope="col">수정</th>
+					<th scope="col">삭제</th>
+					</c:if>
 				</tr>
 			</thead>
 
@@ -95,6 +103,10 @@
 									value="${lists.createdDatetime }" pattern="yyyy-MM-dd HH:mm:ss" />
 								<fmt:formatDate var="newformattedDay" value="${formattedDay }"
 									pattern="yyyy-MM-dd HH:mm:ss" /> ${newformattedDay }</td>
+									<c:if test="${ sessionScope.memberDto.memberemail eq 'admin'}">
+									<td><a href="openBoardDetail?boardIdx=${lists.boardIdx }">수정</a></td>
+									<td><a href="deleteBoard?boardIdx=${lists.boardIdx }">삭제</a></td>
+									</c:if>
 						</tr>
 					</c:forEach>
 				</c:when>

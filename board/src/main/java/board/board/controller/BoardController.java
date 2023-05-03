@@ -37,28 +37,16 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView("/board/boardList");
 		System.out.println("page:"+page);
 		List<BoardDto> list = boardService.selectBoardList(page);
-		
+
 		//paging 로직
 		Paging paging = boardService.pagingParam(page);
-		mv.addObject("list", list);  
-		mv.addObject("paging", paging);  
+		mv.addObject("list", list);
+		mv.addObject("paging", paging);
 		System.out.println("paging:"+paging);
-		
+
 		return mv;
 	}
 
-	@GetMapping("/openAdminBoardList")
-	public ModelAndView adminBoardList(@RequestParam(value = "page",required = false,defaultValue = "1") int page) throws Exception {
-		ModelAndView mv = new ModelAndView("/board/adminBoardList");
-		List<BoardDto> list = boardService.selectAdminBoardList(page);
-		Paging paging = boardService.pagingParam(page);
-		System.out.println("page:"+page);
-		mv.addObject("list", list);
-		mv.addObject("paging", paging);  
-		System.out.println("paging:"+paging);
-		
-		return mv;
-	}
 
 	@GetMapping("/openBoardList2")
 	public ModelAndView openBoardList2(int boardIdx, MemberDto memberdto,@RequestParam(value = "page",defaultValue = "1") int page,Model model) throws Exception {
@@ -81,13 +69,13 @@ public class BoardController {
 		MultipartFile multi = board.getUpload();
 		String uploadPath = servletContext.getRealPath("/resource/images");
 		File file = new File(uploadPath + "/" + multi.getOriginalFilename());
-		
+
 		multi.transferTo(file);
 
 		System.out.println("multi:" + multi);
 		System.out.println("file:" + file);
-		
-		
+
+
 		return "redirect:/board/openBoardList";
 
 	}
@@ -122,7 +110,7 @@ public class BoardController {
 
 		boardService.updateBoard(board);
 
-		return "redirect:/board/openAdminBoardList";
+		return "redirect:/board/openBoardList";
 
 	}
 
@@ -138,7 +126,7 @@ public class BoardController {
 		System.out.println("delFile:" + delFile);
 		delFile.delete();
 
-		return "redirect:/board/openAdminBoardList";
+		return "redirect:/board/openBoardList";
 	}
 
 }

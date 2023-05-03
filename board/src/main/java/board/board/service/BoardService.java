@@ -20,14 +20,14 @@ public class BoardService {
 
 	int pageLimit = 3; //한페이지당 보여줄 글 갯수
 	int blockLimit = 3; //하단에 보여줄 페이지 번호 갯수
-	
+
 	public List<BoardDto> selectBoardList(int page) throws Exception {
-		
+
 		int pageStart = (page-1) * pageLimit;
 		Map<String,Integer> pagingParams = new HashMap<>();
 		pagingParams.put("start", pageStart);
 		pagingParams.put("limit", pageLimit);
-		
+
 		return boardMapper.selectBoardList(pagingParams);
 	}
 
@@ -55,7 +55,7 @@ public class BoardService {
 	public void updateHitcount(int boardIdx) throws Exception {
 		boardMapper.updateHitcount(boardIdx);
 	}
-	
+
 
 	public BoardDto selectBoardList2(int boardIdx) throws Exception {
 		boardMapper.updateHitcount(boardIdx);
@@ -63,18 +63,9 @@ public class BoardService {
 		return board;
 	}
 
-	public List<BoardDto> selectAdminBoardList(int page)throws Exception  {
-		
-		int pageStart = (page-1) * pageLimit;
-		Map<String,Integer> pagingParams = new HashMap<>();
-		pagingParams.put("start", pageStart);
-		pagingParams.put("limit", pageLimit);
-		
-		return boardMapper.selectAdminBoardList(pagingParams);
-	}
 
 	public Paging pagingParam(int page) throws Exception {
-		
+
 		//전체 글 갯수 조회
 		int boardCount = boardMapper.boardCount();
 		//전체 페이지 갯수 계산 (10/3=3.333 =>4)
@@ -85,16 +76,16 @@ public class BoardService {
 		int endPage = startPage + blockLimit -1;
 		if(endPage > maxPage) {
 			endPage = maxPage;
-			
+
 		}
-		
+
 		Paging paging = new Paging();
-		
+
 		paging.setPage(page);
 		paging.setMaxPage(maxPage);
 		paging.setStartPage(startPage);
 		paging.setEndPage(endPage);
-		
+
 		return paging;
 	}
 
