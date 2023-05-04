@@ -52,7 +52,7 @@ body {
 
 .out {
 	position: relative;
-	left:12px;
+	left: 12px;
 	top: 100px;
 }
 
@@ -70,7 +70,11 @@ body {
 		</ul>
 	</div>
 
- <br><br><div><a href="/member/logout" class="out">로그아웃</a></div>
+	<br>
+	<br>
+	<div>
+		<a href="/member/logout" class="out">로그아웃</a>
+	</div>
 
 </body>
 </html>

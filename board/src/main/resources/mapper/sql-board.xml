@@ -12,7 +12,7 @@
 			board_idx,
 			title,
 			hit_cnt,
-			date_format(created_datetime, '%Y-%m-%d') as 'createdDatetime',
+			date_format(created_datetime, '%Y-%m-%d %H:%i:%S') as 'createdDatetime',
 			creator_id
 		FROM
 			t_board
