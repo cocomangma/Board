@@ -1,21 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<style type="text/css">
-	h3{
-	position: relative;
-	top: -60px;
-	left: 300px;
-	}
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-</style>
-
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h3><a href="/">Main</a></h3>
-</body>
-</html>
+<link rel="stylesheet" href="/css/bootstrap.min.css"></link>

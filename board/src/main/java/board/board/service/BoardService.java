@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import board.board.dto.SearchDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import board.board.dto.BoardDto;
 import board.board.mapper.BoardMapper;
 import board.util.Paging;
 
+@Slf4j
 @Service
 public class BoardService {
 
@@ -21,14 +24,15 @@ public class BoardService {
 	int pageLimit = 3; //한페이지당 보여줄 글 갯수
 	int blockLimit = 3; //하단에 보여줄 페이지 번호 갯수
 	
-	public List<BoardDto> selectBoardList(int page) throws Exception {
+	public List<BoardDto> selectBoardList(SearchDto searchDto) throws Exception {
 		
-		int pageStart = (page-1) * pageLimit;
-		Map<String,Integer> pagingParams = new HashMap<>();
-		pagingParams.put("start", pageStart);
-		pagingParams.put("limit", pageLimit);
+		int pageStart = (searchDto.getPage() - 1) * pageLimit;
+		searchDto.setStart(pageStart);
+		searchDto.setLimit(pageLimit);
+
+		log.info("searchDto = {}", searchDto);
 		
-		return boardMapper.selectBoardList(pagingParams);
+		return boardMapper.selectBoardList(searchDto);
 	}
 
 	public void insertBoard(BoardDto board) throws Exception{
@@ -73,14 +77,14 @@ public class BoardService {
 		return boardMapper.selectAdminBoardList(pagingParams);
 	}
 
-	public Paging pagingParam(int page) throws Exception {
+	public Paging pagingParam(SearchDto searchDto) throws Exception {
 		
 		//전체 글 갯수 조회
-		int boardCount = boardMapper.boardCount();
+		int boardCount = boardMapper.boardCount(searchDto);
 		//전체 페이지 갯수 계산 (10/3=3.333 =>4)
 		int maxPage = (int) (Math.ceil((double)boardCount/pageLimit));
 		//시작 페이지 값 계산(1,4,7...)
-		int startPage = (((int) (Math.ceil((double)page/blockLimit)))-1) * blockLimit + 1;
+		int startPage = (((int) (Math.ceil((double)searchDto.getPage()/blockLimit)))-1) * blockLimit + 1;
 		//끝 페이지 값 계산 (3,6,9...)
 		int endPage = startPage + blockLimit -1;
 		if(endPage > maxPage) {
@@ -90,7 +94,7 @@ public class BoardService {
 		
 		Paging paging = new Paging();
 		
-		paging.setPage(page);
+		paging.setPage(searchDto.getPage());
 		paging.setMaxPage(maxPage);
 		paging.setStartPage(startPage);
 		paging.setEndPage(endPage);

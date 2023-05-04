@@ -6,13 +6,11 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import board.board.dto.SearchDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,14 +30,15 @@ public class BoardController {
 	ServletContext servletContext;
 
 	@GetMapping("/openBoardList")
-	public ModelAndView openBoardList(@RequestParam(value = "page",defaultValue = "1") int page) throws Exception {
+	public ModelAndView openBoardList(
+			@ModelAttribute SearchDto searchDto) throws Exception {
 
 		ModelAndView mv = new ModelAndView("/board/boardList");
-		System.out.println("page:"+page);
-		List<BoardDto> list = boardService.selectBoardList(page);
-		
+
+		List<BoardDto> list = boardService.selectBoardList(searchDto);
+
 		//paging 로직
-		Paging paging = boardService.pagingParam(page);
+		Paging paging = boardService.pagingParam(searchDto);
 		mv.addObject("list", list);  
 		mv.addObject("paging", paging);  
 		System.out.println("paging:"+paging);
@@ -48,14 +47,14 @@ public class BoardController {
 	}
 
 	@GetMapping("/openAdminBoardList")
-	public ModelAndView adminBoardList(@RequestParam(value = "page",required = false,defaultValue = "1") int page) throws Exception {
+	public ModelAndView adminBoardList(@ModelAttribute SearchDto searchDto) throws Exception {
 		ModelAndView mv = new ModelAndView("/board/adminBoardList");
-		List<BoardDto> list = boardService.selectAdminBoardList(page);
-		Paging paging = boardService.pagingParam(page);
-		System.out.println("page:"+page);
-		mv.addObject("list", list);
-		mv.addObject("paging", paging);  
-		System.out.println("paging:"+paging);
+//		List<BoardDto> list = boardService.selectAdminBoardList(page);
+//		Paging paging = boardService.pagingParam(page);
+//		System.out.println("page:"+page);
+//		mv.addObject("list", list);
+//		mv.addObject("paging", paging);
+//		System.out.println("paging:"+paging);
 		
 		return mv;
 	}

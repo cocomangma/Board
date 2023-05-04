@@ -8,35 +8,53 @@
 
 	<select id="selectBoardList"
 		resultType="board.board.dto.BoardDto">
-		
-		<![CDATA[
-		
 		SELECT
 			board_idx,
 			title,
 			hit_cnt,
-			created_datetime,
+			date_format(created_datetime, '%Y-%m-%d') as 'createdDatetime',
 			creator_id
 		FROM
 			t_board
-			
-			
+			<choose>
+				<when test="type == 'all'">
+					WHERE 	title like concat('%', ifnull(#{keyword}, ''), '%')
+					OR  	creator_id like concat('%', ifnull(#{keyword}, ''), '%')
+				</when>
+				<when test="type == 'title'">
+					WHERE title like concat('%', ifnull(#{keyword}, ''), '%')
+				</when>
+				<when test="type == 'creatorId'">
+					WHERE creator_id like concat('%', ifnull(#{keyword}, ''), '%')
+				</when>
+			</choose>
 		ORDER BY
 			board_idx DESC
 		limit
-			#{start},#{limit}	
-		
-		]]>
-		
+			#{start},#{limit}
 	</select>
 	
 	<select id="boardCount" resultType="Integer">
-		<![CDATA[
-		select 
-			count(board_idx) 
-		from 
+		SELECT
+			count(board_idx)
+		FROM
 			t_board
-			]]>
+				<choose>
+					<when test="type == 'all'">
+						WHERE 	title like concat('%', ifnull(#{keyword}, ''), '%')
+						OR  	creator_id like concat('%', ifnull(#{keyword}, ''), '%')
+					</when>
+					<when test="type == 'title'">
+						WHERE title like concat('%', ifnull(#{keyword}, ''), '%')
+					</when>
+					<when test="type == 'creatorId'">
+						WHERE creator_id like concat('%', ifnull(#{keyword}, ''), '%')
+					</when>
+				</choose>
+		ORDER BY
+			board_idx DESC
+		limit
+			#{start},#{limit}
 	</select>
 	
 	<select id="selectAdminBoardList"

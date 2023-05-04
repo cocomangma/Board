@@ -11,8 +11,6 @@ public class BoardDto {
     private int hitCnt;
     private String creatorId;
     private String createdDatetime;
-    //private String type;
-    //private String keyword;
     
     //이미지 업로드
     private String image;
