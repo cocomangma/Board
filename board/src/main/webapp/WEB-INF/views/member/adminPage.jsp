@@ -60,14 +60,13 @@ body {
 	<div id="menu">
 		<ul>
 
-			<li><a href="/board/openAdminBoardList">게시판 관리</a></li>  
 			<li><a class="a" href="/member/memberList">회원 관리</a></li>
 
 		</ul>
 
 	</div>
-	
-	
+
+
 
 </body>
 </html>

@@ -40,22 +40,9 @@ public class BoardController {
 		//paging 로직
 		Paging paging = boardService.pagingParam(searchDto);
 		mv.addObject("list", list);  
-		mv.addObject("paging", paging);  
+		mv.addObject("paging", paging);
 		System.out.println("paging:"+paging);
-		
-		return mv;
-	}
 
-	@GetMapping("/openAdminBoardList")
-	public ModelAndView adminBoardList(@ModelAttribute SearchDto searchDto) throws Exception {
-		ModelAndView mv = new ModelAndView("/board/adminBoardList");
-//		List<BoardDto> list = boardService.selectAdminBoardList(page);
-//		Paging paging = boardService.pagingParam(page);
-//		System.out.println("page:"+page);
-//		mv.addObject("list", list);
-//		mv.addObject("paging", paging);
-//		System.out.println("paging:"+paging);
-		
 		return mv;
 	}
 
@@ -80,13 +67,13 @@ public class BoardController {
 		MultipartFile multi = board.getUpload();
 		String uploadPath = servletContext.getRealPath("/resource/images");
 		File file = new File(uploadPath + "/" + multi.getOriginalFilename());
-		
+
 		multi.transferTo(file);
 
 		System.out.println("multi:" + multi);
 		System.out.println("file:" + file);
-		
-		
+
+
 		return "redirect:/board/openBoardList";
 
 	}
@@ -121,7 +108,7 @@ public class BoardController {
 
 		boardService.updateBoard(board);
 
-		return "redirect:/board/openAdminBoardList";
+		return "redirect:/board/openBoardList";
 
 	}
 
@@ -137,7 +124,7 @@ public class BoardController {
 		System.out.println("delFile:" + delFile);
 		delFile.delete();
 
-		return "redirect:/board/openAdminBoardList";
+		return "redirect:/board/openBoardList";
 	}
 
 }

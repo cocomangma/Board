@@ -43,9 +43,9 @@
 					<td>${board.creatorId}</td>
 					<th scope="row">작성일</th>
 					<td><fmt:parseDate var="formattedDay"
-							value="${board.createdDatetime }" pattern="yyyy-MM-dd HH:mm:ss" />
-						<fmt:formatDate var="newformattedDay" value="${formattedDay }"
-							pattern="yyyy-MM-dd HH:mm:ss" /> ${newformattedDay }</td>
+									value="${board.createdDatetime }" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate var="newformattedDay" value="${formattedDay }"
+									pattern="yyyy-MM-dd HH:mm:ss" /> ${newformattedDay }</td>
 				</tr>
 				<tr>
 					<th scope="row">제목</th>
@@ -63,21 +63,18 @@
 			</tbody>
 		</table>
 		<br> <br> <input type="button" id="list" value="목록으로"><br>
-		<br> <br> <input type="button" id="listAdmin" value="관리자목록"
-			style="color: red;"><br> <br> <input type="hidden"
-			name="memberdto">
 	</div>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+
 			$('#list').on("click",function(){
 				location.href = "openBoardList";
 			})
-			
+
 			$('#listAdmin').on("click",function(){
-				
+
 				location.href = "openAdminBoardList";
 			})
 

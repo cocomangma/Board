@@ -33,7 +33,7 @@
 		limit
 			#{start},#{limit}
 	</select>
-	
+
 	<select id="boardCount" resultType="Integer">
 		SELECT
 			count(board_idx)
@@ -51,35 +51,12 @@
 						WHERE creator_id like concat('%', ifnull(#{keyword}, ''), '%')
 					</when>
 				</choose>
-		ORDER BY
-			board_idx DESC
-		limit
-			#{start},#{limit}
 	</select>
-	
-	<select id="selectAdminBoardList"
-		resultType="board.board.dto.BoardDto">
-		
-		<![CDATA[
-		SELECT
-			board_idx,
-			title,
-			hit_cnt,
-			created_datetime,
-			creator_id
-		FROM
-			t_board
-		ORDER BY
-			board_idx DESC
-			limit
-			#{start},#{limit}	
-		]]>
-		
-	</select>
+
 
 	<insert id="insertBoard"
 		parameterType="board.board.dto.BoardDto">
-		
+
         <![CDATA[
             INSERT INTO t_board
             (
@@ -98,13 +75,13 @@
                 #{image}
             )
         ]]>
-        
+
 	</insert>
 
 	<select id="selectBoardDetail" parameterType="int"
 		resultType="board.board.dto.BoardDto">
     	<![CDATA[
-			SELECT 
+			SELECT
 				board_idx, title, contents, hit_cnt,
 				created_datetime,
 				creator_id,image
@@ -118,7 +95,7 @@
 	<select id="selectBoardList2" parameterType="int"
 		resultType="board.board.dto.BoardDto">
     <![CDATA[
-			SELECT 
+			SELECT
 				board_idx, title, contents, hit_cnt,
 				created_datetime,
 				creator_id,
@@ -133,7 +110,7 @@
 
 	<update id="updateHitcount" parameterType="int">
     	<![CDATA[
-			UPDATE 
+			UPDATE
 				t_board
 			SET
 				hit_cnt = hit_cnt + 1
@@ -146,13 +123,11 @@
 	<update id="updateBoard"
 		parameterType="board.board.dto.BoardDto">
         <![CDATA[
-            UPDATE 
-                t_board 
+            UPDATE
+                t_board
             SET
                 title = #{title},
                 contents = #{contents},
-                updated_datetime = NOW(),
-                updater_id = 'admin',
                 image=#{image}
             WHERE
                 board_idx = #{boardIdx}

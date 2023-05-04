@@ -59,7 +59,7 @@ public class BoardService {
 	public void updateHitcount(int boardIdx) throws Exception {
 		boardMapper.updateHitcount(boardIdx);
 	}
-	
+
 
 	public BoardDto selectBoardList2(int boardIdx) throws Exception {
 		boardMapper.updateHitcount(boardIdx);
@@ -67,18 +67,10 @@ public class BoardService {
 		return board;
 	}
 
-	public List<BoardDto> selectAdminBoardList(int page)throws Exception  {
-		
-		int pageStart = (page-1) * pageLimit;
-		Map<String,Integer> pagingParams = new HashMap<>();
-		pagingParams.put("start", pageStart);
-		pagingParams.put("limit", pageLimit);
-		
-		return boardMapper.selectAdminBoardList(pagingParams);
-	}
 
 	public Paging pagingParam(SearchDto searchDto) throws Exception {
-		
+
+		log.info("pagingParam searchDto: " + searchDto);
 		//전체 글 갯수 조회
 		int boardCount = boardMapper.boardCount(searchDto);
 		//전체 페이지 갯수 계산 (10/3=3.333 =>4)
@@ -89,16 +81,15 @@ public class BoardService {
 		int endPage = startPage + blockLimit -1;
 		if(endPage > maxPage) {
 			endPage = maxPage;
-			
+
 		}
-		
+
 		Paging paging = new Paging();
-		
 		paging.setPage(searchDto.getPage());
 		paging.setMaxPage(maxPage);
 		paging.setStartPage(startPage);
 		paging.setEndPage(endPage);
-		
+
 		return paging;
 	}
 

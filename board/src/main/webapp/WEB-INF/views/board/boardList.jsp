@@ -41,6 +41,10 @@
 				<col width="15%" />
 				<col width="10%" />
 				<col width="15%" />
+				<c:if test="${ sessionScope.memberDto.memberemail eq 'admin'}">
+				<col width="5%" />
+				<col width="5%" />
+				</c:if>
 			</colgroup>
 			<thead class="table-light">
 				<tr>
@@ -49,6 +53,10 @@
 					<th scope="col">작성자</th>
 					<th scope="col">조회수</th>
 					<th scope="col">작성일</th>
+					<c:if test="${ sessionScope.memberDto.memberemail eq 'admin'}">
+					<th scope="col">수정</th>
+					<th scope="col">삭제</th>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody>
@@ -80,7 +88,7 @@
                     <li class="page-item"><a class="page-link">&lt;</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li class="page-item"><a class="page-link" href="openBoardList?page=${paging.page-1 }">&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="openBoardList?page=${paging.page-1 }&type=${searchDto.type}&keyword=${searchDto.keyword}">&lt;</a></li>
                 </c:otherwise>
             </c:choose>
             <c:forEach begin="${paging.startPage }" end="${paging.endPage }"
@@ -90,7 +98,7 @@
                          <li class="page-item active"><a class="page-link">${i}</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="openBoardList?page=${i}">${i}</a></li>
+                        <li class="page-item"><a class="page-link" href="openBoardList?page=${i}&type=${searchDto.type}&keyword=${searchDto.keyword}">${i}</a></li>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
@@ -99,7 +107,7 @@
                     <li class="page-item"><a class="page-link">&gt;</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li class="page-item"><a class="page-link" href="openBoardList?page=${paging.page+1 }">&gt;</a></li>
+                    <li class="page-item"><a class="page-link" href="openBoardList?page=${paging.page+1 }&type=${searchDto.type}&keyword=${searchDto.keyword}">&gt;</a></li>
                 </c:otherwise>
             </c:choose>
         </ul>
