@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +50,12 @@ body {
 	left: 100px;
 }
 
+.out {
+	position: relative;
+	left:12px;
+	top: 100px;
+}
+
 #menu>ul>li>a:hover {
 	background-color: brown;
 }
@@ -59,14 +66,11 @@ body {
 
 	<div id="menu">
 		<ul>
-
 			<li><a class="a" href="/member/memberList">회원 관리</a></li>
-
 		</ul>
-
 	</div>
 
-
+ <br><br><div><a href="/member/logout" class="out">로그아웃</a></div>
 
 </body>
 </html>

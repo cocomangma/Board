@@ -6,4 +6,25 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
+
 <link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+
+<html>
+<head>
+<style type="text/css">
+
+.main{
+text-align: center;
+position:relative;
+left: 320px;
+bottom: 50px;
+font-size: 25px;
+}
+</style>
+</head>
+<body>
+<a href="/" class="main">Main</a>
+</body>
+
+
+</html>

@@ -15,6 +15,7 @@
             <a href="/member/logout" class="btn btn-danger">로그아웃</a>
         </div>
 		<form:form action="openBoardList" method="get" id="search" class="d-flex justify-content-between search" modelAttribute="searchDto">
+		<input type="hidden" value="${searchDto.page}"/>
 		    <div class="col-auto">
 		        <a href="openBoardWrite" class="btn btn-primary">글쓰기</a>
 		    </div>
@@ -70,6 +71,10 @@
 							<td>${lists.creatorId}</td>
 							<td>${lists.hitCnt}</td>
 							<td>${lists.createdDatetime }</td>
+							<c:if test="${ sessionScope.memberDto.memberemail eq 'admin'}">
+							<td><a href="openBoardDetail?boardIdx=${lists.boardIdx }">수정</a></td>
+									<td><a href="deleteBoard?boardIdx=${lists.boardIdx }">삭제</a></td>
+									</c:if>
 						</tr>
 					</c:forEach>
 				</c:when>
