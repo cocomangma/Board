@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@include file="../common/header.jsp" %>
-	
+<%@include file="../common/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,12 +17,19 @@
 	top: 300px;
 }
 
+#kakao {
+	position: relative;
+	left: 190px;
+	top: 260px;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div><h2 class="a">회원 로그인</h2></div>
+	<div>
+		<h2 class="a">회원 로그인</h2>
+	</div>
 	<br>
 	<form action="login" method="post" class="joinForm">
 		<div class="textForm">
@@ -33,49 +40,87 @@
 			<input type="password" name="memberpassword" placeholder="비밀번호"
 				class="pw" id="pw">
 		</div>
-		<br><input type="submit" value="로그인" class="btn" id="submit">
+		<br> <input type="submit" value="로그인" class="btn" id="submit">
+
+
 	</form>
+	<br>
+	<br>
+	<div>
+		<button id="kakao">
+			<img
+				src="${pageContext.request.contextPath}/resource/images/kakaoImage.png">
+		</button>
+	</div>
 	<div>
 		<a class="b" href="/member/memberSaveForm">회원가입</a>
 	</div>
+	<a href="http://developers.kakao.com/logout">카카오 로그아웃</a>
 
 </body>
-
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script type="text/javascript">
+	function moveBoard() {
+		location.href = "/board/openBoardList";
+	}
 
-var msg = "${msg}";
+	Kakao.init('94582037f7b661f1d64a734a1f4b6700');
+	$("#kakao").on("click", function() {
+		//1. 로그인 시도
+		Kakao.Auth.login({
+			success : function(authObj) {
 
-if(msg!=""){
-	
-alert(msg);
-	
-}
+				//2. 로그인 성공시, API 호출
+				Kakao.API.request({
+					url : '/v2/user/me',
+					success : function(res) {
+						console.log("성공:" + res);
+						var id = res.id;
+						scope: 'account_email';
+						alert('로그인성공');
+						moveBoard();
+					}
+				})
+				console.log(authObj);
+				var token = authObj.access_token;
+			},
+			fail : function(err) {
+				alert(JSON.stringify(err));
+			}
+		});
 
+	}) //
 
-	$(document).ready(function(){
-		
+	var msg = "${msg}";
+
+	if (msg != "") {
+
+		alert(msg);
+
+	}
+
+	$(document).ready(function() {
+
 		$('#email').focus();
-		
-		$('#submit').on("click",function(){
-			if($('#email').val()==""){
+
+		$('#submit').on("click", function() {
+			if ($('#email').val() == "") {
 				alert("이메일을 입력하세요")
 				$('#email').focus();
 				return false;
 			}
-			
-			if($('#pw').val()==""){
+
+			if ($('#pw').val() == "") {
 				alert("비밀번호를 입력하세요")
 				$('#pw').focus();
 				return false;
 			}
-			
-		})
-		
-	})
-	
 
-	
+		})
+
+	})
 </script>
 </html>
