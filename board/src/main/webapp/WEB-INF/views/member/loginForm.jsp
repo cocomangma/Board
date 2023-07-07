@@ -53,9 +53,9 @@
 		</button>
 	</div>
 	<div>
-		<a class="b" href="/member/memberSaveForm">회원가입</a>
+		<a class="b btn"  href="/member/memberSaveForm">회원가입</a>
 	</div>
-	<a href="http://developers.kakao.com/logout">카카오 로그아웃</a>
+	<input type="button" onclick="kakaoLogout()" value="카카오 로그아웃">
 
 </body>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -93,6 +93,20 @@
 		});
 
 	}) //
+
+	function kakaoLogout(kakaoKey) {
+	    Kakao.init('94582037f7b661f1d64a734a1f4b6700'); // 초기화
+	    Kakao.isInitialized();
+
+	    if (!Kakao.Auth.getAccessToken()) { // 토큰이 있는지 확인 (토큰 가져와보기)
+	      console.log('Not logged in.');
+	      return;
+	    }
+
+	    Kakao.Auth.logout(function() { // 카카오 로그아웃
+	      console.log(Kakao.Auth.getAccessToken());
+	    });
+	  };
 
 	var msg = "${msg}";
 
