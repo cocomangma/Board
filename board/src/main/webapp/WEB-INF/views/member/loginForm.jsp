@@ -55,7 +55,7 @@
 	<div>
 		<a class="b btn"  href="/member/memberSaveForm">회원가입</a>
 	</div>
-	<input type="button" onclick="kakaoLogout()" value="카카오 로그아웃">
+	<!-- <input type="button" onclick="kakaoLogout()" value="카카오 로그아웃"> -->
 
 </body>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
