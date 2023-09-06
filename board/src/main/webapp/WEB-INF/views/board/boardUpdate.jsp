@@ -44,7 +44,7 @@
 							<fmt:parseDate var="formattedDay" value="${lists.createdDatetime }" pattern="yyyy-MM-dd"/>
 						<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd HH:mm:ss"/>
 						${newformattedDay }
-						
+
 						</td>
 					</tr>
 					<tr>
@@ -59,24 +59,24 @@
 						<textarea title="내용" id="contents" name="contents">${board.contents }</textarea>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th scope="row">기존 이미지</th>
 						<td colspan="3" class="view_text" >
 						<img width="30%" alt="originalImage"
 						src="${request.getContextPath()}/resource/images/${board.image} " /></td>
 					</tr>
-					
+
 					<tr>
 						<th scope="row">수정할 이미지</th>
 						<td colspan="3" class="view_text">
 						<input type="file" id="upload" name="upload">
 						</td>
 					</tr>
-					 
+
 				</tbody>
 			</table>
-			
+
 			<br>
 			<input type="submit" id="edit" value="수정하기">
 			<input type="button" id="list" value="목록으로"><br><br>
@@ -101,15 +101,17 @@
 
 				});
 
+
 				/* $("#delete").on("click", function() {
 					var frm = $("#frm")[0];
 					console.log(frm);
 					frm.action = "deleteBoard";
 					frm.submit();
-				
-				}); */
 
+				}); */
+				console.log("@@@@@@@")
 			})
+			console.log("@@@@@@@")
 		</script>
 
 	</div>

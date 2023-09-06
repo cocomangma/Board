@@ -23,15 +23,15 @@ public class BoardService {
 
 	int pageLimit = 3; //한페이지당 보여줄 글 갯수
 	int blockLimit = 3; //하단에 보여줄 페이지 번호 갯수
-	
+
 	public List<BoardDto> selectBoardList(SearchDto searchDto) throws Exception {
-		
+
 		int pageStart = (searchDto.getPage() - 1) * pageLimit;
 		searchDto.setStart(pageStart);
 		searchDto.setLimit(pageLimit);
 
 		log.info("searchDto = {}", searchDto);
-		
+
 		return boardMapper.selectBoardList(searchDto);
 	}
 
@@ -42,6 +42,7 @@ public class BoardService {
 
 	public BoardDto selectBoardDetail(int boardIdx) throws Exception {
 		BoardDto board = boardMapper.selectBoardDetail(boardIdx);
+		System.out.println("@@@@@@@@@@@@@W");
 		return board;
 	}
 

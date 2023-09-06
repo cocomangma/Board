@@ -43,9 +43,9 @@
 					<td>${board.creatorId}</td>
 					<th scope="row">작성일</th>
 					<td><fmt:parseDate var="formattedDay"
-									value="${board.createdDatetime }" pattern="yyyy-MM-dd HH:mm:ss" />
-								<fmt:formatDate var="newformattedDay" value="${formattedDay }"
-									pattern="yyyy-MM-dd HH:mm:ss" /> ${newformattedDay }</td>
+							value="${board.createdDatetime }" pattern="yyyy-MM-dd HH:mm:ss" />
+						<fmt:formatDate var="newformattedDay" value="${formattedDay }"
+							pattern="yyyy-MM-dd HH:mm:ss" /> ${newformattedDay }</td>
 				</tr>
 				<tr>
 					<th scope="row">제목</th>
@@ -58,27 +58,91 @@
 				<tr>
 					<th>이미지</th>
 					<td><img width="70%" alt="image"
-						src="${request.getContextPath()}/resource/images/${board.image} " /></td>
+						src="${request.getContextPath()}/resource/images/${board.image}"/></td>
 				</tr>
 			</tbody>
 		</table>
 		<br> <br> <input type="button" id="list" value="목록으로"><br>
+		<div>
+			<input type="text" id="commentWriter" placeholder="작성자"> <input
+				type="text" id="commentContents" placeholder="내용">
+			<button id="comment-write-btn" onclick="commentWriterLoad()">댓글작성</button>
+		</div>
+		<div id="commentList">
+			<table>
+				<tr>
+					<th>댓글번호</th>
+					<th>작성자</th>
+					<th>내용</th>
+					<th>작성시간</th>
+				</tr>
+				<c:forEach items="${commentDto}" var="comment">
+					<tr>
+						<td>${comment.id}</td>
+						<td>${comment.commentWriter}</td>
+						<td>${comment.commentContents}</td>
+						<td>${comment.commentCreatedTime}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
 	</div>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 
-			$('#list').on("click",function(){
+			$('#list').on("click", function() {
 				location.href = "openBoardList";
 			})
 
-			$('#listAdmin').on("click",function(){
+			$('#listAdmin').on("click", function() {
 
 				location.href = "openAdminBoardList";
 			})
 
 		})
+
+		function commentWriterLoad() {
+			const writer = $("#commentWriter").val();
+			const contents = $("#commentContents").val();
+			const id = ${board.boardIdx};
+
+			$.ajax({
+				type : "post",
+				url : "/comment/save",
+				data : {
+					commentWriter : writer,
+					commentContents : contents,
+					boardId : id
+				},
+				dataType : "json",
+				success : function(commentList) {
+					console.log("성공");
+					console.log("commentList" + JSON.stringify(commentList));
+					let output = "<table>";
+					output += "<tr><th>댓글번호</th>";
+					output += "<th>작성자</th>";
+					output += "<th>내용</th>";
+					output += "<th>작성시간</th></tr>";
+					for(let i=0;i<commentList.length;i++){
+						output += "<tr>";
+						output += "<td>" + commentList[i].id + "</td>";
+						output += "<td>" + commentList[i].commentWriter + "</td>";
+						output += "<td>" + commentList[i].commentContents + "</td>";
+						output += "<td>" + commentList[i].commentCreatedTime + "</td>";
+						output += "</tr>";
+					}
+					output += "</table>";
+					$("#commentList").html(output);
+					$("#commentWriter").val('');
+					$("#commentContents").val('');
+				},
+				error : function() {
+					console.log("실패");
+				}
+			});
+		}
 	</script>
 </body>
 </html>

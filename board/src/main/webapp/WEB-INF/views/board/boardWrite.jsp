@@ -6,14 +6,14 @@
 <head>
 <link rel="stylesheet" href="/css/style.css">
  <style type="text/css">
-    
+
     	.a{
     		position: relative;
     		top: -160px;
     	}
-    	
+
     	#list{position: relative; left: 900px;}
-    	
+
     	.d {
 	margin-left: 430px;
 }
@@ -27,8 +27,8 @@
         <h2 class="d">게시판 등록</h2><br>
         <form id="frm" name="frm" method="post" action="/board/insertBoard" enctype="multipart/form-data">
             <table class="board_detail">
-            
-            
+
+
                 <tr>
                     <td>제목</td>
                     <td><input type="text" id="title" name="title"></td>
@@ -43,7 +43,7 @@
                         <textarea id="contents" name="contents"></textarea>
                     </td>
                 </tr>
-              	
+
                 <tr>
                 <td>이미지</td>
                 <td>
@@ -56,25 +56,26 @@
             <input type="button" id="list" value="목록으로">
         </form>
     </div>
-    
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#title").focus();
-		
+
 		$("#list").on("click",function(){
 			location.href="openBoardList";
 		})
-		
+
 		$("#submit").on("click",function(){
 			if($("#title").val()==""){
 				alert('제목을 입력하세요');
 				$("#title").focus();
 				return false;
 			}
+			console.log("@@@@@")
 		})
 	})
-	
+
 </script>
 </body>
 </html>

@@ -15,16 +15,22 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import board.board.dto.BoardDto;
+import board.board.dto.CommentDto;
 import board.board.service.BoardService;
+import board.board.service.CommentService;
 import board.member.dto.MemberDto;
 import board.util.Paging;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+
+	@Autowired
+	private CommentService commentService;
 
 	@Autowired
 	ServletContext servletContext;
@@ -39,10 +45,9 @@ public class BoardController {
 
 		//paging 로직
 		Paging paging = boardService.pagingParam(searchDto);
-		mv.addObject("list", list);  
+		mv.addObject("list", list);
 		mv.addObject("paging", paging);
 		System.out.println("paging:"+paging);
-
 		return mv;
 	}
 
@@ -52,6 +57,8 @@ public class BoardController {
 		BoardDto board = boardService.selectBoardList2(boardIdx);
 		mv.addObject("board", board);
 		model.addAttribute("page",page);
+		List<CommentDto> commentDto = commentService.findAll((long) boardIdx);
+		model.addAttribute("commentDto",commentDto);
 		return mv;
 	}
 
@@ -69,9 +76,9 @@ public class BoardController {
 		File file = new File(uploadPath + "/" + multi.getOriginalFilename());
 
 		multi.transferTo(file);
-
-		System.out.println("multi:" + multi);
-		System.out.println("file:" + file);
+		log.info("@@@@@@@"+multi);
+		log.info("@@@@@@@"+file);
+		System.out.println("@@@@@@@@@@@@");
 
 
 		return "redirect:/board/openBoardList";
