@@ -1,18 +1,16 @@
 // BoardServiceImpl.java
 package board.board.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import board.board.dto.SearchDto;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import board.board.dto.BoardDto;
+import board.board.dto.SearchDto;
 import board.board.mapper.BoardMapper;
 import board.util.Paging;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service

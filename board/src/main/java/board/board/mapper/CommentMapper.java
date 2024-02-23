@@ -11,4 +11,6 @@ public interface CommentMapper {
 	public void save(CommentDto commentDto) throws Exception;
 
 	public List<CommentDto> findAll(Long boardId);
+
+	public void deleteComment(int id);
 }

@@ -62,19 +62,20 @@
 				</tr>
 			</tbody>
 		</table>
-		<br> <br> <input type="button" id="list" value="목록으로"><br>
+		<br> <br> <input type="button" id="list" value="목록으로"><br><br>
 		<div>
-			<input type="text" id="commentWriter" placeholder="작성자"> <input
-				type="text" id="commentContents" placeholder="내용">
+			<input type="text" id="commentWriter" placeholder="작성자">
+			<input type="text" id="commentContents" placeholder="내용">
 			<button id="comment-write-btn" onclick="commentWriterLoad()">댓글작성</button>
 		</div>
+		<br>
 		<div id="commentList">
 			<table>
 				<tr>
-					<th>댓글번호</th>
-					<th>작성자</th>
-					<th>내용</th>
-					<th>작성시간</th>
+					<th>댓글번호</th>&nbsp;
+					<th>작성자</th>&nbsp;
+					<th>내용</th>&nbsp;
+					<th>작성시간</th>&nbsp;
 				</tr>
 				<c:forEach items="${commentDto}" var="comment">
 					<tr>
@@ -107,6 +108,7 @@
 			const writer = $("#commentWriter").val();
 			const contents = $("#commentContents").val();
 			const id = ${board.boardIdx};
+			const commentTime = $("#commentCreatedTime").val();
 
 			$.ajax({
 				type : "post",
@@ -114,17 +116,18 @@
 				data : {
 					commentWriter : writer,
 					commentContents : contents,
-					boardId : id
+					boardId : id,
+					commentCreatedTime : commentTime
 				},
 				dataType : "json",
 				success : function(commentList) {
-					console.log("성공");
-					console.log("commentList" + JSON.stringify(commentList));
+					//console.log("commentList" + JSON.stringify(commentList));
+					console.log("")
 					let output = "<table>";
-					output += "<tr><th>댓글번호</th>";
-					output += "<th>작성자</th>";
-					output += "<th>내용</th>";
-					output += "<th>작성시간</th></tr>";
+					output += "<tr><th>댓글번호</th>&nbsp;";
+					output += "<th>작성자</th>&nbsp;";
+					output += "<th>내용</th>&nbsp;";
+					output += "<th>작성시간</th></tr>&nbsp;";
 					for(let i=0;i<commentList.length;i++){
 						output += "<tr>";
 						output += "<td>" + commentList[i].id + "</td>";
@@ -137,6 +140,7 @@
 					$("#commentList").html(output);
 					$("#commentWriter").val('');
 					$("#commentContents").val('');
+					console.log("@@@@"+$("#commentCreatedTime").val());
 				},
 				error : function() {
 					console.log("실패");

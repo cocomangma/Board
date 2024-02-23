@@ -23,5 +23,9 @@ public class CommentService {
 		return commentMapper.findAll(boardId);
 	}
 
+	public void delete(int id) throws Exception{
+		commentMapper.deleteComment(id);
+	}
+
 
 }

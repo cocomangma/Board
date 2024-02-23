@@ -13,4 +13,10 @@
 	<select id="findAll" parameterType="Long" resultType="board.board.dto.CommentDto">
 		select * from comment_table where boardId = #{boardId} order by id desc
 	</select>
+
+	<delete id="deleteComment" parameterType="int">
+		<![CDATA[
+    	delete from comment_table where id = #{id}
+    	]]>
+	</delete>
 </mapper>

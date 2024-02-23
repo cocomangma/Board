@@ -1,12 +1,11 @@
 package board.board.mapper;
 
 import java.util.List;
-import java.util.Map;
 
-import board.board.dto.SearchDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import board.board.dto.BoardDto;
+import board.board.dto.SearchDto;
 
 @Mapper
 public interface BoardMapper {

@@ -22,12 +22,16 @@ public class CommentController {
 	@PostMapping("/save")
 	@ResponseBody
 	public List<CommentDto> save(@ModelAttribute CommentDto commentDto) throws Exception{
-		System.out.println("comment"+commentDto);
 		commentService.save(commentDto);
 		//게시글에 작성된 댓글 리스트 가져옴
 		List<CommentDto> commentDtoList = commentService.findAll(commentDto.getBoardId());
 		return commentDtoList;
 
+	}
+	@PostMapping("/deleteComment")
+	public String delete(int id) throws Exception {
+		commentService.delete(id);
+		return "redirect:/board/openBoardList2";
 	}
 
 }

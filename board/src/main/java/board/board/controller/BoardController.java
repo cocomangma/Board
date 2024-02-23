@@ -76,8 +76,8 @@ public class BoardController {
 		File file = new File(uploadPath + "/" + multi.getOriginalFilename());
 
 		multi.transferTo(file);
-		log.info("@@@@@@@"+multi);
-		log.info("@@@@@@@"+file);
+		log.info("multi:"+multi);
+		log.info("file:"+file);
 		System.out.println("@@@@@@@@@@@@");
 
 
