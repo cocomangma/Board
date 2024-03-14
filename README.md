@@ -9,10 +9,10 @@
 
 ### 🏢개발 환경
 
-- **Language** : Java 1.8
+- **Language** : Java 11.0.22
 - **IDE** : Eclipse
-- **Framework** : Spring boot
-- **Database** : mysql
+- **Framework** : Spring boot 2.7.6
+- **Database** : mysql 8.0.31
 - **SQL Mapper** : MyBatis
 
 ### 게시판 기능
