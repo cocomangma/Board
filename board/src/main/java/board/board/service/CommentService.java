@@ -18,12 +18,12 @@ public class CommentService {
 		commentMapper.save(commentDto);
 	}
 
-	public List<CommentDto> findAll(Long boardId) {
+	public List<CommentDto> findAll(Long boardId)throws Exception {
 
 		return commentMapper.findAll(boardId);
 	}
 
-	public void delete(int id) throws Exception{
+	public void delete(int id) throws Exception {
 		commentMapper.deleteComment(id);
 	}
 

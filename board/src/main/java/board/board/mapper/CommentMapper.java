@@ -10,7 +10,7 @@ import board.board.dto.CommentDto;
 public interface CommentMapper {
 	public void save(CommentDto commentDto) throws Exception;
 
-	public List<CommentDto> findAll(Long boardId);
+	public List<CommentDto> findAll(Long boardId) throws Exception;
 
-	public void deleteComment(int id);
+	public void deleteComment(int id) throws Exception;
 }

@@ -70,12 +70,14 @@
 		</div>
 		<br>
 		<div id="commentList">
+		<input type="hidden" value="${BoardDto.boardIdx}"/>
 			<table>
 				<tr>
 					<th>댓글번호</th>&nbsp;
 					<th>작성자</th>&nbsp;
 					<th>내용</th>&nbsp;
 					<th>작성시간</th>&nbsp;
+					<th>삭제</th>&nbsp;
 				</tr>
 				<c:forEach items="${commentDto}" var="comment">
 					<tr>
@@ -83,6 +85,7 @@
 						<td>${comment.commentWriter}</td>
 						<td>${comment.commentContents}</td>
 						<td>${comment.commentCreatedTime}</td>
+						<td><a href="/comment/deleteComment?id=${comment.id }&boardIdx=${board.boardIdx}">삭제</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -127,7 +130,8 @@
 					output += "<tr><th>댓글번호</th>&nbsp;";
 					output += "<th>작성자</th>&nbsp;";
 					output += "<th>내용</th>&nbsp;";
-					output += "<th>작성시간</th></tr>&nbsp;";
+					output += "<th>작성시간</th>&nbsp;";
+					output += "<th>삭제</th></tr>&nbsp;";
 					for(let i=0;i<commentList.length;i++){
 						output += "<tr>";
 						output += "<td>" + commentList[i].id + "</td>";

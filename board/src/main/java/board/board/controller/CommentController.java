@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +29,11 @@ public class CommentController {
 		return commentDtoList;
 
 	}
-	@PostMapping("/deleteComment")
-	public String delete(int id) throws Exception {
+	@GetMapping("/deleteComment")
+	public String delete(int id, int boardIdx) throws Exception {
 		commentService.delete(id);
-		return "redirect:/board/openBoardList2";
+		System.out.println("@@@@@"+id);
+		return "redirect:/board/openBoardList2?boardIdx=" + boardIdx;
 	}
 
 }

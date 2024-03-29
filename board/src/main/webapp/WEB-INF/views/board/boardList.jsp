@@ -67,7 +67,7 @@
 						<tr>
 							<th scope="row">${lists.boardIdx}</td>
 							<td class="title"><a
-								href="openBoardList2?boardIdx=${lists.boardIdx }&page=${paging.page}">${lists.title }</a></td>
+								href="openBoardList2?boardIdx=${lists.boardIdx }">${lists.title }</a></td>
 							<td>${lists.creatorId}</td>
 							<td>${lists.hitCnt}</td>
 							<td>${lists.createdDatetime }</td>
